@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Todo
 import XCTest
 
 class TodoTests: XCTestCase {
@@ -21,16 +22,13 @@ class TodoTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+    func testCanAddAndRemoveTodo() {
+        var todoItem: TodoItem?
+        let store = TodoStore()
+        var err: NSError?
+        todoItem = store.addTodo("Test todo", error: &err)
+        XCTAssertNotNil(todoItem, "Todo item is nil")
+        XCTAssertNil(err, "Error is not nil error: " + err.debugDescription)
+        store.removeTodo(todoItem!)
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }
